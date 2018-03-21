@@ -678,12 +678,14 @@ class SdkUnitTests(unittest.TestCase):
 
             file1 = envelopes_api.get_document(login_accounts[0].account_id, 'combined', envelope_summary.envelope_id)
             assert len(file1) > 0
+            print('file1=%s' % file1)
             subprocess.call('open ' + file1, shell=True)
 
             logsList = diag_api.list_request_logs()
             request_log_id = logsList.api_request_logs[0].request_log_id
             file2 = diag_api.get_request_log(request_log_id)
             assert len(file2) > 0
+            print('file2=%s' % file2)
             subprocess.call('open ' + file2, shell=True)
 
         except ApiException as e:
