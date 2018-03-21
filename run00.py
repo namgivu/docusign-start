@@ -64,7 +64,7 @@ envelopes_api = EnvelopesApi()
 
 try:
     login_info = auth_api.login(api_password='true', include_account_id_guid='true')
-    import sys; sys.exit() #TODO need fix in $VENV/python3.5/site-packages/docusign_esign/api_client.py ref.
+    import sys; sys.exit() #TODO need fix in $VENV/python3.5/site-packages/docusign_esign/api_client.py ref. https://github.com/docusign/docusign-python-client/issues/10
     '''
     full error
     /home/namgivu/NN/code/_NN_/docusign-start/venv3/bin/python /home/namgivu/NN/code/_NN_/docusign-start/run00.py
