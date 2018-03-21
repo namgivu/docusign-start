@@ -257,25 +257,28 @@ class SdkUnitTests(unittest.TestCase):
 
 
     def testEmbeddedSigning(self):
+        """
+        Embedded means creating url that works in an iframe or browser to allow signing
+        """
         file_contents = open(sign_test1_file, 'rb').read()
 
         # create an envelope to be signed
         envelope_definition = docusign.EnvelopeDefinition()
         envelope_definition.email_subject = 'Please Sign my Python SDK Envelope'
-        envelope_definition.email_blurb = 'Hello, Please sign my Python SDK Envelope.'
+        envelope_definition.email_blurb   = 'Hello, Please sign my Python SDK Envelope.'
 
         # add a document to the envelope
         doc = docusign.Document()
         base64_doc = base64.b64encode(file_contents).decode("utf-8")
         doc.document_base64 = base64_doc
-        doc.name = 'TestFile.pdf'
-        doc.document_id = '1'
+        doc.name            = 'TestFile.pdf'
+        doc.document_id     = '1'
         envelope_definition.documents = [doc]
 
         # Add a recipient to sign the document
         signer = docusign.Signer()
         signer.email = username
-        signer.name = 'Pat Developer'
+        signer.name  = 'Pat Developer'
         signer.recipient_id = '1'
 
         # this value represents the client's unique identifier for the signer
@@ -284,12 +287,12 @@ class SdkUnitTests(unittest.TestCase):
 
         # Create a SignHere tab somewhere on the document for the signer to sign
         sign_here = docusign.SignHere()
-        sign_here.document_id = '1'
-        sign_here.page_number = '1'
+        sign_here.document_id  = '1'
+        sign_here.page_number  = '1'
         sign_here.recipient_id = '1'
-        sign_here.x_position = '100'
-        sign_here.y_position =  '100'
-        sign_here.scale_value = '0.5'
+        sign_here.x_position   = '100'
+        sign_here.y_position   = '100'
+        sign_here.scale_value  = '0.5'
 
         tabs = docusign.Tabs()
         tabs.sign_here_tabs = [sign_here]
