@@ -99,3 +99,16 @@ ENV/
 
 # mypy
 .mypy_cache/
+
+##this project
+venv3/
+
+.idea/docusign-start.iml
+.idea/misc.xml
+.idea/modules.xml
+.idea/workspace.xml
+.idea/deployment.xml
+.idea/other.xml
+.idea/dictionaries/
+.idea/dataSources.local.xml
+.idea/dataSources/*
