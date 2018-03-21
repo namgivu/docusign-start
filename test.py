@@ -38,7 +38,7 @@ import os; parent_path = os.path.dirname(os.path.realpath(__file__))
 sign_test1_file = parent_path+"/docusign-template.pdf"
 
 template_id     = "40cff443-cbd6-4751-a59a-c1e1d9668b93"
-envelope_id     = "a792bbea-94a4-4b3c-a47f-37766c57e66f" #TODO how to get this?
+envelope_id     = "ee8872e4-6f10-468d-bf52-d57dd56d17e3" #value taken from running testRequestASignature() below
 
 oauth_base_url  = "account-d.docusign.com" # use account.docusign.com for Live/Production
 redirect_uri    = "https://www.docusign.com/api" #must register with integrator_key ref. https://support.docusign.com/en/articles/Redirect-URI-not-registered
@@ -362,8 +362,8 @@ class SdkUnitTests(unittest.TestCase):
         doc = docusign.Document()
         base64_doc = base64.b64encode(file_contents).decode("utf-8")
         doc.document_base64 = base64_doc
-        doc.name = 'TestFile.pdf'
-        doc.document_id = '1'
+        doc.name            = 'TestFile.pdf'
+        doc.document_id     = '1'
         envelope_template.documents = [doc]
 
         # Add a recipient to sign the document
@@ -374,12 +374,12 @@ class SdkUnitTests(unittest.TestCase):
 
         # Create a SignHere tab somewhere on the document for the signer to sign
         sign_here = docusign.SignHere()
-        sign_here.document_id = '1'
-        sign_here.page_number = '1'
+        sign_here.document_id  = '1'
+        sign_here.page_number  = '1'
         sign_here.recipient_id = '1'
-        sign_here.x_position = '100'
-        sign_here.y_position =  '100'
-        sign_here.scale_value = '0.5'
+        sign_here.x_position   = '100'
+        sign_here.y_position   = '100'
+        sign_here.scale_value  = '0.5'
 
         tabs = docusign.Tabs()
         tabs.sign_here_tabs = [sign_here]
@@ -425,14 +425,14 @@ class SdkUnitTests(unittest.TestCase):
         # create an envelope to be signed
         envelope_definition = docusign.EnvelopeDefinition()
         envelope_definition.email_subject = 'Please Sign my Python SDK Envelope'
-        envelope_definition.email_blurb = 'Hello, Please sign my Python SDK Envelope.'
+        envelope_definition.email_blurb   = 'Hello, Please sign my Python SDK Envelope.'
 
         # add a document to the envelope
         doc = docusign.Document()
         base64_doc = base64.b64encode(file_contents).decode("utf-8")
         doc.document_base64 = base64_doc
-        doc.name = 'TestFile.pdf'
-        doc.document_id = '1'
+        doc.name            = 'TestFile.pdf'
+        doc.document_id     = '1'
         envelope_definition.documents = [doc]
 
         # Add a recipient to sign the document
@@ -447,12 +447,12 @@ class SdkUnitTests(unittest.TestCase):
 
         # Create a Text tab somewhere on the document for the signer to sign
         text = docusign.Text()
-        text.document_id = '1'
-        text.page_number = '1'
+        text.document_id  = '1'
+        text.page_number  = '1'
         text.recipient_id = '1'
-        text.x_position = '100'
-        text.y_position =  '100'
-        text.scale_value = '0.5'
+        text.x_position   = '100'
+        text.y_position   = '100'
+        text.scale_value  = '0.5'
 
         tabs = docusign.Tabs()
         tabs.text_tabs = [text]
@@ -479,6 +479,7 @@ class SdkUnitTests(unittest.TestCase):
             self.api_client.host = base_url
             docusign.configuration.api_client = self.api_client
 
+            #do sending
             envelope_summary = envelopes_api.create_envelope(login_accounts[0].account_id, envelope_definition=envelope_definition)
             assert envelope_summary is not None
             assert envelope_summary.envelope_id is not None
@@ -486,8 +487,10 @@ class SdkUnitTests(unittest.TestCase):
             print("EnvelopeSummary: ", end="")
             pprint(envelope_summary)
 
+            #do downloading #TODO what 'combined' param means
             file = envelopes_api.get_document(login_accounts[0].account_id, 'combined', envelope_summary.envelope_id)
             assert len(file) > 0
+            print('file=%s' % file)
             subprocess.call('open ' + file, shell=True)
 
         except ApiException as e:
