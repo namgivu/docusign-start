@@ -206,12 +206,12 @@ class SdkUnitTests(unittest.TestCase):
 
 
     def testRequestSignatureFromTemplate(self):
-        template_role_name = 'Needs to sign'
+        template_role_name = 'Needs to sign' #TODO is it required to be the same as defined in the template on https://appdemo.docusign.com/templates/details/40cff443-cbd6-4751-a59a-c1e1d9668b93
 
         # create an envelope to be signed
         envelope_definition = docusign.EnvelopeDefinition()
-        envelope_definition.email_subject = 'Please Sign my Python SDK Envelope'
-        envelope_definition.email_blurb = 'Hello, Please sign my Python SDK Envelope.'
+        envelope_definition.email_subject = '(w/ template) Please Sign my Python SDK Envelope'
+        envelope_definition.email_blurb   = 'Hello, Please sign my Python SDK Envelope.'
 
         # assign template information including ID and role(s)
         envelope_definition.template_id = template_id
