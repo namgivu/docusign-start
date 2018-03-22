@@ -23,9 +23,6 @@ from docusign_esign import AuthenticationApi, EnvelopesApi, TemplatesApi, Diagno
 from docusign_esign.rest import ApiException
 
 
-#TODO Don't commit this
-import os; os.environ['DOCUSIGN_USER']='namgivu@gmail.com'; os.environ['DOCUSIGN_PASS']='Nn!#dcs2018'
-
 import os
 username        = os.environ['DOCUSIGN_USER'] if 'DOCUSIGN_USER' in os.environ else None; assert username is not None, 'DOCUSIGN_USER is required in system variables'
 password        = os.environ['DOCUSIGN_PASS'] if 'DOCUSIGN_PASS' in os.environ else None
