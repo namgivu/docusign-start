@@ -22,8 +22,9 @@ import docusign_esign as docusign
 from docusign_esign import AuthenticationApi, EnvelopesApi, TemplatesApi, DiagnosticsApi
 from docusign_esign.rest import ApiException
 
-
 import os
+
+
 username        = os.environ['DOCUSIGN_USER'] if 'DOCUSIGN_USER' in os.environ else None; assert username is not None, 'DOCUSIGN_USER is required in system variables'
 password        = os.environ['DOCUSIGN_PASS'] if 'DOCUSIGN_PASS' in os.environ else None
 user_id         = "f3d9588f-4aee-4c2c-8873-d66ea8860ce4" #this value taken from API Username ref. https://admindemo.docusign.com/api-integrator-key
